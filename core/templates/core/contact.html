@@ -1,13 +1,8 @@
-<h1>Contact Page</h1>
+{% extends "base.html" %}
 
-<p>This is Contact Page</p>
 
-<form action="{ {% url "contact" %}}" method="post">
+{% block content %}
+<h1>Contact Us</h1>
+<p>Fill in the form below to reach us.</p>
 
-    <input type="text" name="name">
-    <input type="email" name="email" id="email">
-    <textarea name="description" id="" cols="30" rows="10"></textarea>
-    <!-- <input type="text" name="description" id="description"> -->
-
-    <input type="submit" value="Contact Us">
-</form>
+{% endblock %}
