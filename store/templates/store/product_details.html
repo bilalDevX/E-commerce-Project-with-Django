@@ -78,10 +78,18 @@
             </div>
             <!-- row.// -->
             <hr />
-            <a href="./product-detail.html" class="btn btn-primary">
+            {% comment %} <a href="./product-detail.html" class="btn btn-primary">
               <span class="text">Add to cart</span>
               <i class="fas fa-shopping-cart"></i>
             </a>
+             {% endcomment %}
+
+             <form action="{% url 'add_to_cart' product.id %}" method="post">
+              {% csrf_token %}
+              <label for="quantity">Quantity:</label>
+              <input type="number" name="quantity" value="1" min="1" id="quantity">
+              <button type="submit">Add to Cart</button>
+          </form>
           </article>
           <!-- product-info-aside .// -->
         </main>
