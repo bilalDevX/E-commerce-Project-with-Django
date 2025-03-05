@@ -1,1 +1,2 @@
-# E-commerce-Project-with-Django
+# E-commerce-Project-with-Django in 2025
+
