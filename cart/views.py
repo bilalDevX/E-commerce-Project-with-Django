@@ -13,15 +13,26 @@ def cart_detail(request):
 
 @login_required
 def add_to_cart(request, product_id):
-    """Add a product to the user’s cart or increase its quantity."""
     cart, created = Cart.objects.get_or_create(user=request.user)
     product = get_object_or_404(Product, id=product_id)
+    
+    try:
+        quantity = int(request.POST.get('quantity', 1))
+    except ValueError:
+        quantity = 1
+
     cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
     if not created:
-        cart_item.quantity += 1
-        cart_item.save()
+        # Option 1: Increment existing quantity:
+        cart_item.quantity += quantity
+        # Option 2: Replace with new quantity:
+        # cart_item.quantity = quantity
+    else:
+        cart_item.quantity = quantity
+    cart_item.save()
     messages.success(request, f"{product.name} added to your cart.")
     return redirect('cart_detail')
+
 
 @login_required
 def remove_from_cart(request, item_id):
